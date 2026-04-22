@@ -6,3 +6,8 @@ __pycache__/
 dist/
 build/
 .ruff_cache/
+marketing/
+rubrics/
+rubric_packs/
+setup_engine.py
+setup_premium_packs.py
