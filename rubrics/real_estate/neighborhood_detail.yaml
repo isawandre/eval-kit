@@ -1,0 +1,53 @@
+name: neighborhood_detail
+description: >
+  Evaluates neighborhood descriptions for walkability info,
+  amenity proximity, commute data, and lifestyle context.
+version: "1.0.0"
+scoring_mode: additive
+checks:
+  - id: proximity_amenities
+    description: Lists nearby amenities with specifics
+    patterns:
+      - "\\b(minutes (from|to)|walking distance|steps from|blocks from)\\b"
+      - "\\b(grocery|restaurant|park|school|hospital|gym|coffee)\\b"
+    score: 0.25
+    severity: high
+    message: "Lists nearby amenities with proximity"
+
+  - id: commute_info
+    description: Includes commute or transportation details
+    patterns:
+      - "\\b(commute|highway|interstate|transit|bus|train|metro|freeway)\\b"
+      - "\\b(\\d+ minute (drive|commute|walk)|easy access to)\\b"
+    score: 0.20
+    severity: medium
+    message: "Includes commute and transportation info"
+
+  - id: walkability
+    description: References walkability or bike-friendliness
+    patterns:
+      - "\\b(walkable|walk score|bike (friendly|lane|path)|pedestrian)\\b"
+      - "\\b(sidewalk|trail|greenway|bike score)\\b"
+    score: 0.15
+    severity: low
+    message: "References walkability or bike access"
+
+  - id: named_locations
+    description: Uses specific location names, not just generic descriptors
+    patterns:
+      - "\\b[A-Z][a-z]+ (Park|Square|Mall|Center|District|Village|Station)\\b"
+    score: 0.20
+    severity: medium
+    message: "References specific named locations"
+
+  - id: lifestyle_context
+    description: Paints a lifestyle picture of the neighborhood
+    patterns:
+      - "\\b(vibrant|quiet|family-friendly|up-and-coming|established)\\b"
+      - "\\b(farmers market|nightlife|outdoor|community events|local)\\b"
+    score: 0.20
+    severity: medium
+    message: "Provides neighborhood lifestyle context"
+strengths:
+  - pattern: "\\b(walk score|\\d+ minute|named (park|square|center))\\b"
+    label: "Specific, navigable neighborhood info"

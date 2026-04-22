@@ -1,0 +1,62 @@
+name: api_reference
+description: >
+  Evaluates API documentation for endpoint clarity, request/response
+  schemas, authentication details, and rate limit disclosure.
+version: "1.0.0"
+scoring_mode: additive
+checks:
+  - id: endpoint_format
+    description: Documents endpoints with HTTP method and path
+    patterns:
+      - "\\b(GET|POST|PUT|PATCH|DELETE|HEAD)\\b"
+      - "\\b(/api/|/v\\d+/|endpoint|route|URL)\\b"
+    score: 0.20
+    severity: high
+    message: "Documents API endpoints with HTTP methods"
+
+  - id: request_schema
+    description: Shows request body or query parameter structure
+    patterns:
+      - "\\b(request body|payload|query param|header|content-type)\\b"
+      - "\\b(required|optional|default|type)\\b"
+    score: 0.20
+    severity: high
+    message: "Documents request schema"
+
+  - id: response_schema
+    description: Shows response structure with field descriptions
+    patterns:
+      - "\\b(response|returns|status \\d{3}|body|schema)\\b"
+      - "\\b(field|property|key|value|nested)\\b"
+    score: 0.20
+    severity: high
+    message: "Documents response schema"
+
+  - id: auth_details
+    description: Explains authentication requirements
+    patterns:
+      - "\\b(auth|token|API key|bearer|OAuth|JWT|credentials)\\b"
+      - "\\b(header|Authorization|X-API-Key|login|session)\\b"
+    score: 0.20
+    severity: high
+    message: "Documents authentication requirements"
+
+  - id: rate_limits
+    description: Discloses rate limiting or quotas
+    patterns:
+      - "\\b(rate limit|quota|throttl|requests per|per (minute|second|hour))\\b"
+      - "\\b(429|too many requests|retry-after|backoff)\\b"
+    score: 0.10
+    severity: medium
+    message: "Discloses rate limits"
+
+  - id: curl_example
+    description: Includes a curl or equivalent request example
+    patterns:
+      - "\\b(curl|httpie|fetch|axios|requests\\.)\\b"
+    score: 0.10
+    severity: low
+    message: "Includes request example"
+strengths:
+  - pattern: "\\b(curl|GET /|POST /|status 200)\\b"
+    label: "Concrete API examples"

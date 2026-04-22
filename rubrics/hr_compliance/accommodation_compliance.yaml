@@ -1,0 +1,53 @@
+name: accommodation_compliance
+description: >
+  Evaluates ADA/FMLA accommodation request responses for
+  interactive process compliance and reasonable accommodation language.
+version: "1.0.0"
+scoring_mode: additive
+checks:
+  - id: interactive_process
+    description: Initiates or continues the interactive accommodation process
+    patterns:
+      - "\\b(interactive process|work together to|discuss your needs)\\b"
+      - "\\b(explore options|find a solution|accommodate)\\b"
+    score: 0.25
+    severity: high
+    message: "Engages the interactive accommodation process"
+
+  - id: reasonable_accommodation
+    description: Offers or discusses specific accommodations
+    patterns:
+      - "\\b(modified schedule|remote work|assistive technology|ergonomic)\\b"
+      - "\\b(reassignment|light duty|leave of absence|flexible hours)\\b"
+    score: 0.25
+    severity: high
+    message: "Proposes specific reasonable accommodations"
+
+  - id: medical_documentation
+    description: Properly requests supporting documentation
+    patterns:
+      - "\\b(medical documentation|healthcare provider|certification form)\\b"
+      - "\\b(supporting documentation|physician statement)\\b"
+    score: 0.20
+    severity: medium
+    message: "Appropriately requests medical documentation"
+
+  - id: confidentiality_assurance
+    description: Assures confidential handling of medical information
+    patterns:
+      - "\\b(confidential|private|separate file|need-to-know)\\b"
+      - "\\b(will not be shared|protected information|secure)\\b"
+    score: 0.15
+    severity: medium
+    message: "Provides confidentiality assurance for medical info"
+
+  - id: timeline_communication
+    description: Sets expectations for accommodation timeline
+    patterns:
+      - "\\b(within \\d+|we will respond|expect to hear|follow up by)\\b"
+    score: 0.15
+    severity: low
+    message: "Communicates accommodation decision timeline"
+strengths:
+  - pattern: "\\b(ADA|FMLA|interactive process|reasonable accommodation)\\b"
+    label: "Cites relevant legislation or framework"

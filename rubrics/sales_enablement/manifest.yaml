@@ -1,0 +1,30 @@
+name: sales_enablement
+version: "1.0.0"
+description: >
+  Evaluates LLM-generated sales communications for persuasion
+  quality, objection handling, value articulation, and closing technique.
+author: eval-kit
+license: proprietary
+filters:
+  - rubric: objection_handling
+    weight: 0.20
+    scoring_mode: additive
+  - rubric: value_proposition
+    weight: 0.20
+    scoring_mode: additive
+  - rubric: urgency_creation
+    weight: 0.15
+    scoring_mode: additive
+  - rubric: competitor_positioning
+    weight: 0.15
+    scoring_mode: additive
+  - rubric: closing_technique
+    weight: 0.15
+    scoring_mode: additive
+  - rubric: rapport_building
+    weight: 0.15
+    scoring_mode: additive
+thresholds:
+  pass: 0.75
+  partial: 0.50
+  fail: 0.0

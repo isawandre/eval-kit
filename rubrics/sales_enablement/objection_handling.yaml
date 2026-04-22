@@ -1,0 +1,54 @@
+name: objection_handling
+description: >
+  Evaluates quality of objection acknowledgment, reframing,
+  and evidence-based responses to common buyer pushback.
+version: "1.0.0"
+scoring_mode: additive
+checks:
+  - id: acknowledgment
+    description: Validates the prospect's concern before responding
+    patterns:
+      - "\\b(I understand|that's a fair|valid concern|I hear you|makes sense)\\b"
+      - "\\b(you're right to|many (customers|clients) ask|common question)\\b"
+    score: 0.20
+    severity: high
+    message: "Acknowledges objection before responding"
+
+  - id: reframe
+    description: Reframes the objection as an opportunity or different angle
+    patterns:
+      - "\\b(what if|another way to look|consider this|the flip side)\\b"
+      - "\\b(actually.+benefit|turns out|in practice)\\b"
+    score: 0.20
+    severity: high
+    message: "Reframes objection constructively"
+
+  - id: social_proof
+    description: Uses case studies, testimonials, or data to support response
+    patterns:
+      - "\\b(for example|one of our clients|case study|we saw \\d+%)\\b"
+      - "\\b(company like yours|similar situation|industry average)\\b"
+    score: 0.25
+    severity: high
+    message: "Provides social proof or evidence"
+
+  - id: specificity
+    description: Gives specific numbers, timelines, or outcomes
+    patterns:
+      - "\\b(\\d+%|\\$\\d+|within \\d+ (days|weeks|months))\\b"
+      - "\\b(ROI|payback period|saved|reduced|increased)\\b"
+    score: 0.20
+    severity: medium
+    message: "Uses specific metrics and outcomes"
+
+  - id: bridge_to_next
+    description: Transitions smoothly to next step after handling objection
+    patterns:
+      - "\\b(would it help if|shall I|can I show you|let me)\\b"
+      - "\\b(next step|walk you through|demo|free trial)\\b"
+    score: 0.15
+    severity: medium
+    message: "Bridges objection handling to forward momentum"
+strengths:
+  - pattern: "\\b(ROI|\\d+%|saved|case study)\\b"
+    label: "Data-driven objection response"

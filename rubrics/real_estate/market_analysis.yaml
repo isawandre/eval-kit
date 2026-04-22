@@ -1,0 +1,54 @@
+name: market_analysis
+description: >
+  Evaluates market analysis content for data-driven insights,
+  trend identification, and comparative market positioning.
+version: "1.0.0"
+scoring_mode: additive
+checks:
+  - id: price_data
+    description: Includes specific pricing data or comparisons
+    patterns:
+      - "\\b(\\$\\d+[,.]?\\d*|price per sq|median price|average price)\\b"
+      - "\\b(list price|sold for|asking price|assessed at)\\b"
+    score: 0.25
+    severity: high
+    message: "Includes specific pricing data"
+
+  - id: comparable_sales
+    description: References comparable recent sales
+    patterns:
+      - "\\b(comp(arable)?s?|recently sold|similar (home|property)|nearby sale)\\b"
+      - "\\b(sold (in|on|within)|closed at|comparable at)\\b"
+    score: 0.20
+    severity: high
+    message: "References comparable sales"
+
+  - id: market_trend
+    description: Identifies market direction or trend
+    patterns:
+      - "\\b(market (trend|is|has)|appreciation|depreciation|inventory)\\b"
+      - "\\b(buyer's market|seller's market|days on market|DOM)\\b"
+    score: 0.20
+    severity: medium
+    message: "Identifies market trends"
+
+  - id: time_context
+    description: Grounds analysis in specific time period
+    patterns:
+      - "\\b(Q[1-4] \\d{4}|last (month|quarter|year)|year-over-year|YOY)\\b"
+      - "\\b(since (January|February|March|April|May|June|July|August|September|October|November|December))\\b"
+    score: 0.20
+    severity: medium
+    message: "Time-specific market analysis"
+
+  - id: data_source
+    description: Cites data source or MLS
+    patterns:
+      - "\\b(MLS|Zillow|Redfin|Realtor\\.com|county records|tax records)\\b"
+      - "\\b(according to|data from|source:|per the)\\b"
+    score: 0.15
+    severity: medium
+    message: "Cites data source"
+strengths:
+  - pattern: "\\b(MLS|comp|median|DOM|year-over-year)\\b"
+    label: "Data-driven market analysis"

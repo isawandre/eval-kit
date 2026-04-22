@@ -1,0 +1,54 @@
+name: termination_protocol
+description: >
+  Evaluates involuntary termination communications for legal
+  safety, factual basis, and proper procedural language.
+version: "1.0.0"
+scoring_mode: penalty
+checks:
+  - id: emotional_language
+    description: Flags emotionally charged phrasing inappropriate for termination docs
+    patterns:
+      - "\\b(disappointed in you|let us down|betrayed|disgusted)\\b"
+      - "\\b(you always|you never|everyone knows|attitude problem)\\b"
+    penalty: 0.20
+    severity: high
+    message: "Emotional or subjective language — document with facts"
+
+  - id: discriminatory_timing
+    description: Flags references suggesting discriminatory termination timing
+    patterns:
+      - "\\b(after (your|the) pregnancy|since (your|the) diagnosis)\\b"
+      - "\\b(after you turned \\d+|since you filed)\\b"
+    penalty: 0.25
+    severity: critical
+    message: "Timing language suggests discriminatory motive"
+
+  - id: missing_factual_basis
+    description: Checks for documented, specific performance issues
+    patterns:
+      - "\\b(on \\d{1,2}/\\d{1,2}|dated|documented|written warning)\\b"
+      - "\\b(performance review|PIP|improvement plan|incident report)\\b"
+    penalty: -0.15
+    severity: high
+    message: "Provide specific dates and documented incidents"
+
+  - id: benefits_cobra_info
+    description: Includes COBRA and benefits continuation information
+    patterns:
+      - "\\b(COBRA|benefits continuation|health insurance|coverage end)\\b"
+      - "\\b(final paycheck|accrued PTO|severance)\\b"
+    penalty: -0.15
+    severity: medium
+    message: "Include COBRA/benefits and final compensation details"
+
+  - id: release_agreement_mention
+    description: References separation agreement if applicable
+    patterns:
+      - "\\b(separation agreement|release|waiver|non-compete)\\b"
+      - "\\b(\\d+ days to review|consult an attorney|revocation period)\\b"
+    penalty: -0.10
+    severity: medium
+    message: "Mention separation agreement review period"
+strengths:
+  - pattern: "\\b(documented|on \\d|written warning|PIP)\\b"
+    label: "Factual, documented basis for decision"

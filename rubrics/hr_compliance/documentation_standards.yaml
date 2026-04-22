@@ -1,0 +1,62 @@
+name: documentation_standards
+description: >
+  Ensures HR communications meet professional documentation
+  standards including clarity, completeness, and proper formatting.
+version: "1.0.0"
+scoring_mode: additive
+checks:
+  - id: professional_tone
+    description: Uses professional, neutral tone throughout
+    patterns:
+      - "\\b(please|thank you|we appreciate|we understand)\\b"
+      - "\\b(respectfully|for your information|as discussed)\\b"
+    score: 0.15
+    severity: low
+    message: "Maintains professional tone"
+
+  - id: action_items
+    description: Lists clear action items or next steps
+    patterns:
+      - "\\b(action item|next step|please (complete|submit|contact|return))\\b"
+      - "\\b(you will need to|required to|expected to)\\b"
+    score: 0.20
+    severity: medium
+    message: "Includes clear action items"
+
+  - id: contact_information
+    description: Provides specific contact for questions
+    patterns:
+      - "\\b(contact|reach out to|questions.+(email|call|phone))\\b"
+      - "\\b(HR (department|representative|team)|your manager)\\b"
+    score: 0.20
+    severity: medium
+    message: "Provides point of contact for follow-up"
+
+  - id: date_stamping
+    description: Includes dates or references temporal context
+    patterns:
+      - "\\b(effective|as of|dated|beginning|starting)\\b"
+      - "\\b(\\d{1,2}/\\d{1,2}/\\d{2,4}|january|february|march|april|may|june|july|august|september|october|november|december)\\b"
+    score: 0.20
+    severity: medium
+    message: "Includes date references for record-keeping"
+
+  - id: signature_block
+    description: Ends with appropriate sign-off
+    patterns:
+      - "\\b(sincerely|regards|respectfully|best regards|thank you)\\b"
+      - "\\b(HR department|human resources|people operations)\\b"
+    score: 0.15
+    severity: low
+    message: "Proper professional sign-off"
+
+  - id: cc_or_distribution
+    description: Notes distribution or copies
+    patterns:
+      - "\\b(cc:|copy to|distributed to|filed in|personnel file)\\b"
+    score: 0.10
+    severity: low
+    message: "Notes document distribution"
+strengths:
+  - pattern: "\\b(attached|enclosed|see appendix|refer to)\\b"
+    label: "References supporting documents"

@@ -1,0 +1,55 @@
+name: bias_detection
+description: >
+  Flags gendered, racial, age-based, or disability-related
+  language that could expose the organization to EEOC claims.
+version: "1.0.0"
+scoring_mode: penalty
+checks:
+  - id: gendered_language
+    description: Detects he/she assumptions, gendered job titles
+    patterns:
+      - "\\b(chairman|manpower|policeman|fireman|stewardess)\\b"
+      - "\\b(he|she) (should|must|will)\\b"
+    penalty: 0.15
+    severity: high
+    message: "Gendered language detected — use neutral alternatives"
+
+  - id: age_indicators
+    description: Flags age-suggestive phrasing
+    patterns:
+      - "\\b(young|youthful|energetic|digital native|mature|seasoned)\\b"
+      - "\\b(recent graduate|fresh out of|old school)\\b"
+    penalty: 0.15
+    severity: high
+    message: "Age-indicative language — potential ADEA violation"
+
+  - id: racial_cultural_markers
+    description: Detects culturally coded or exclusionary phrasing
+    patterns:
+      - "\\b(culture fit|urban|articulate|well-spoken|exotic)\\b"
+      - "\\b(native english|american-born)\\b"
+    penalty: 0.20
+    severity: critical
+    message: "Culturally coded language — disparate impact risk"
+
+  - id: disability_language
+    description: Flags ableist terms or physical requirement assumptions
+    patterns:
+      - "\\b(handicapped|crippled|suffers from|wheelchair-bound)\\b"
+      - "\\b(must be able to stand|physically fit|able-bodied)\\b"
+    penalty: 0.15
+    severity: high
+    message: "Ableist language or unnecessary physical requirements"
+
+  - id: religious_markers
+    description: Detects religious scheduling or belief assumptions
+    patterns:
+      - "\\b(christian values|faith-based|church|sunday availability)\\b"
+    penalty: 0.10
+    severity: medium
+    message: "Religious language detected — Title VII concern"
+strengths:
+  - pattern: "\\b(they|them|the candidate|the applicant|the employee)\\b"
+    label: "Uses inclusive, gender-neutral references"
+  - pattern: "\\b(reasonable accommodation|accessible|inclusive)\\b"
+    label: "Proactive inclusion language"

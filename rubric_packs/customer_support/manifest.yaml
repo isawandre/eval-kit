@@ -1,0 +1,19 @@
+name: customer_support
+version: "1.0.0"
+description: >
+  Evaluation rubrics for customer support response quality.
+  Covers escalation handling, resolution completeness, and empathy.
+author: eval-kit
+gate: domain
+
+thresholds:
+  pass: 0.75
+  warn: 0.45
+
+rubrics:
+  - file: rubrics/escalation_detection.yaml
+    weight: 0.30
+  - file: rubrics/resolution_quality.yaml
+    weight: 0.40
+  - file: rubrics/empathy_score.yaml
+    weight: 0.30

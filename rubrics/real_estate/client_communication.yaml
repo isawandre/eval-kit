@@ -1,0 +1,54 @@
+name: client_communication
+description: >
+  Evaluates agent-to-client communication for professionalism,
+  clarity, expectation setting, and responsiveness cues.
+version: "1.0.0"
+scoring_mode: additive
+checks:
+  - id: personalization
+    description: Addresses client by name or references their specific needs
+    patterns:
+      - "\\b(you mentioned|based on your|your (criteria|budget|timeline|needs))\\b"
+      - "\\b(as we discussed|per your request|you were looking for)\\b"
+    score: 0.25
+    severity: high
+    message: "Personalized to client's specific needs"
+
+  - id: expectation_setting
+    description: Sets clear expectations for process or timeline
+    patterns:
+      - "\\b(expect|timeline|typically takes|next (step|steps)|you can anticipate)\\b"
+      - "\\b(within \\d+|by (Monday|Friday|next week)|process (is|takes))\\b"
+    score: 0.20
+    severity: medium
+    message: "Sets clear expectations"
+
+  - id: market_education
+    description: Educates client on market conditions relevant to their decision
+    patterns:
+      - "\\b(in this market|current(ly)?|given the|inventory is)\\b"
+      - "\\b(what this means for you|impact on your|strategy)\\b"
+    score: 0.20
+    severity: medium
+    message: "Educates client on market context"
+
+  - id: professional_tone
+    description: Maintains professional, warm tone
+    patterns:
+      - "\\b(happy to|glad to|I'd recommend|let me know|don't hesitate)\\b"
+      - "\\b(thank you|appreciate|looking forward|my pleasure)\\b"
+    score: 0.15
+    severity: low
+    message: "Professional, approachable tone"
+
+  - id: call_to_action
+    description: Ends with clear next step or action
+    patterns:
+      - "\\b(shall I|would you like (to|me)|let's schedule|I'll send)\\b"
+      - "\\b(call me at|available (Monday|this week|anytime))\\b"
+    score: 0.20
+    severity: medium
+    message: "Includes clear call to action"
+strengths:
+  - pattern: "\\b(you mentioned|your criteria|based on our)\\b"
+    label: "Client-focused communication"

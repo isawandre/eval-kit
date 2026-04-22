@@ -1,0 +1,53 @@
+name: legal_language
+description: >
+  Ensures HR communications avoid legally dangerous phrasing
+  that could create implied contracts or admissions of liability.
+version: "1.0.0"
+scoring_mode: penalty
+checks:
+  - id: implied_contract
+    description: Flags language that could create an implied employment contract
+    patterns:
+      - "\\b(guaranteed|permanent position|job security|we promise)\\b"
+      - "\\b(as long as you want|lifetime|forever)\\b"
+    penalty: 0.25
+    severity: critical
+    message: "Implied contract language — at-will employment risk"
+
+  - id: liability_admission
+    description: Detects admissions of fault or liability
+    patterns:
+      - "\\b(our fault|we were wrong|we admit|company is responsible)\\b"
+      - "\\b(we failed to|we neglected|we should have)\\b"
+    penalty: 0.20
+    severity: critical
+    message: "Potential liability admission detected"
+
+  - id: retaliation_indicators
+    description: Flags phrasing that could suggest retaliation
+    patterns:
+      - "\\b(because you filed|since you complained|after your report)\\b"
+      - "\\b(consequence of reporting|result of your grievance)\\b"
+    penalty: 0.25
+    severity: critical
+    message: "Retaliatory language — potential whistleblower violation"
+
+  - id: hipaa_phi
+    description: Detects protected health information disclosure
+    patterns:
+      - "\\b(diagnosis|medical condition|prescription|treatment for)\\b"
+      - "\\b(doctor said|medical records show|health issue)\\b"
+    penalty: 0.20
+    severity: critical
+    message: "Possible PHI disclosure — HIPAA concern"
+
+  - id: missing_at_will_disclaimer
+    description: Checks for at-will employment disclaimer when relevant
+    patterns:
+      - "\\b(at-will|at will|does not constitute a contract)\\b"
+    penalty: -0.10
+    severity: low
+    message: "Missing at-will disclaimer in employment communication"
+strengths:
+  - pattern: "\\b(at-will|does not constitute|not a guarantee)\\b"
+    label: "Proper legal disclaimers present"

@@ -1,0 +1,54 @@
+name: competitor_positioning
+description: >
+  Evaluates how the response positions against competitors
+  without badmouthing — professional contrast over attack.
+version: "1.0.0"
+scoring_mode: additive
+checks:
+  - id: professional_contrast
+    description: Draws comparison without negative language
+    patterns:
+      - "\\b(where we differ|our approach|we focus on|we prioritize)\\b"
+      - "\\b(compared to|while others|traditional solutions)\\b"
+    score: 0.25
+    severity: high
+    message: "Professional competitive contrast"
+
+  - id: strength_based
+    description: Leads with own strengths rather than competitor weaknesses
+    patterns:
+      - "\\b(our strength|what we do (well|best)|we excel)\\b"
+      - "\\b(built for|designed to|optimized for|specializ)\\b"
+    score: 0.25
+    severity: high
+    message: "Strength-based positioning"
+
+  - id: use_case_fit
+    description: Positions based on specific use-case superiority
+    patterns:
+      - "\\b(for (teams|companies|workflows) like yours)\\b"
+      - "\\b(your specific|in your (industry|space|market))\\b"
+    score: 0.20
+    severity: medium
+    message: "Use-case-specific positioning"
+
+  - id: migration_ease
+    description: Addresses switching cost concerns
+    patterns:
+      - "\\b(easy to switch|migration|import|onboarding takes)\\b"
+      - "\\b(we handle the|transition|up and running in)\\b"
+    score: 0.15
+    severity: medium
+    message: "Addresses switching friction"
+
+  - id: honest_limitations
+    description: Acknowledges own limitations honestly
+    patterns:
+      - "\\b(we're not the best fit if|where we're still growing)\\b"
+      - "\\b(honestly|to be transparent|fair to say)\\b"
+    score: 0.15
+    severity: low
+    message: "Honest about limitations — builds trust"
+strengths:
+  - pattern: "\\b(where we differ|our approach|built for)\\b"
+    label: "Mature competitive positioning"

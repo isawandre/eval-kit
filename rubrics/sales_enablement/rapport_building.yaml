@@ -1,0 +1,53 @@
+name: rapport_building
+description: >
+  Evaluates personalization, empathy signals, and
+  relationship-building language in sales communications.
+version: "1.0.0"
+scoring_mode: additive
+checks:
+  - id: personalization
+    description: References prospect-specific details
+    patterns:
+      - "\\b(you mentioned|I noticed (your|on your)|your (company|team|website))\\b"
+      - "\\b(based on our (call|chat|conversation)|as you said)\\b"
+    score: 0.25
+    severity: high
+    message: "Personalized to prospect's context"
+
+  - id: empathy_signals
+    description: Shows understanding of prospect's situation
+    patterns:
+      - "\\b(I (get|understand) (how|that|why)|that must be|sounds like)\\b"
+      - "\\b(challenging|frustrating|exciting|important to you)\\b"
+    score: 0.20
+    severity: medium
+    message: "Empathy signals present"
+
+  - id: name_usage
+    description: Uses prospect's name naturally
+    patterns:
+      - "\\b(Hi |Hey |Dear |Thanks )\\w+\\b"
+    score: 0.15
+    severity: low
+    message: "Natural name usage"
+
+  - id: shared_context
+    description: References shared experiences or mutual connections
+    patterns:
+      - "\\b(we both|like you|in our industry|as a fellow)\\b"
+      - "\\b(mutual|referred by|connected through|at the conference)\\b"
+    score: 0.20
+    severity: medium
+    message: "Establishes shared context"
+
+  - id: genuine_curiosity
+    description: Asks about prospect's goals beyond the sale
+    patterns:
+      - "\\b(what are you hoping|where do you see|what's your vision)\\b"
+      - "\\b(long-term|bigger picture|beyond just|what matters most)\\b"
+    score: 0.20
+    severity: medium
+    message: "Shows genuine curiosity about prospect's goals"
+strengths:
+  - pattern: "\\b(you mentioned|I noticed|based on our)\\b"
+    label: "Prospect-specific personalization"

@@ -1,0 +1,31 @@
+name: empathy_score
+description: >
+  Measures emotional attunement — acknowledgment of frustration,
+  validation of experience, and human tone.
+
+scoring:
+  mode: keyword_coverage
+
+  positive_signals:
+    - "i understand"
+    - "i can see why"
+    - "that must be frustrating"
+    - "i'm sorry"
+    - "i apologize"
+    - "thank you for your patience"
+    - "i appreciate you"
+    - "completely understandable"
+    - "you're right to feel"
+    - "let me make this right"
+    - "your experience matters"
+
+  negative_signals:
+    - "per our policy"
+    - "as previously stated"
+    - "i already told you"
+    - "that is incorrect"
+    - "you should have"
+    - "it's not our fault"
+
+  expected_min_hits: 2
+  negative_penalty: 0.35

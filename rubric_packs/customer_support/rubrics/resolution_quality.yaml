@@ -1,0 +1,38 @@
+name: resolution_quality
+description: >
+  Scores whether the response moves toward concrete resolution
+  rather than deflection or stalling.
+
+scoring:
+  mode: composite
+
+  # keyword arm
+  positive_signals:
+    - "here's what we can do"
+    - "i've gone ahead and"
+    - "your refund"
+    - "credited to your account"
+    - "resolved"
+    - "fixed"
+    - "updated your"
+    - "next steps"
+    - "follow up"
+    - "confirmation"
+    - "scheduled"
+
+  negative_signals:
+    - "unfortunately we cannot"
+    - "our policy states"
+    - "there's nothing"
+    - "you'll have to"
+    - "not eligible"
+
+  expected_min_hits: 3
+  negative_penalty: 0.20
+
+  # pattern arm
+  patterns:
+    - "i('ve|\\shave)\\s+(already|gone ahead|processed|applied)"
+    - "(refund|credit|replacement|discount)\\s+(of|for|has been)"
+    - "within\\s+\\d+\\s+(hour|day|business day)"
+    - "(confirm|verify|check).*?(email|account|ticket)"

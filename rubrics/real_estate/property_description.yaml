@@ -1,0 +1,54 @@
+name: property_description
+description: >
+  Evaluates quality of property listing descriptions including
+  sensory language, feature highlighting, and buyer appeal.
+version: "1.0.0"
+scoring_mode: additive
+checks:
+  - id: sensory_language
+    description: Uses visual, tactile, or spatial language
+    patterns:
+      - "\\b(sun-drenched|open-concept|vaulted|hardwood|granite|stainless)\\b"
+      - "\\b(natural light|panoramic|lush|manicured|spacious|cozy)\\b"
+    score: 0.20
+    severity: medium
+    message: "Uses sensory and evocative language"
+
+  - id: room_by_room
+    description: Describes individual rooms or spaces
+    patterns:
+      - "\\b(kitchen|bedroom|bathroom|living room|dining|office|garage)\\b"
+      - "\\b(primary suite|en-suite|walk-in|mudroom|laundry|basement)\\b"
+    score: 0.20
+    severity: high
+    message: "Provides room-by-room description"
+
+  - id: dimensions_specs
+    description: Includes specific measurements or counts
+    patterns:
+      - "\\b(\\d+[,.]?\\d* (sq|square) (ft|feet)|\\d+ bed|\\d+ bath)\\b"
+      - "\\b(\\d+-car garage|\\d+ acre|lot size|built in \\d{4})\\b"
+    score: 0.20
+    severity: high
+    message: "Includes specific dimensions and counts"
+
+  - id: lifestyle_framing
+    description: Frames features as lifestyle benefits
+    patterns:
+      - "\\b(entertain|morning coffee|family|retreat|unwind|host)\\b"
+      - "\\b(perfect for|ideal for|imagine|picture yourself)\\b"
+    score: 0.20
+    severity: medium
+    message: "Frames features as lifestyle benefits"
+
+  - id: recent_updates
+    description: Mentions renovations, upgrades, or new systems
+    patterns:
+      - "\\b(recently (renovated|updated|replaced)|new (roof|HVAC|windows))\\b"
+      - "\\b(upgraded|remodeled|custom|brand new|\\d{4} renovation)\\b"
+    score: 0.20
+    severity: medium
+    message: "Highlights recent updates or renovations"
+strengths:
+  - pattern: "\\b(sq ft|acre|built in \\d{4}|renovated)\\b"
+    label: "Specific, factual property details"
