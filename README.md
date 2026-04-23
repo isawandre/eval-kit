@@ -37,3 +37,21 @@ Score any LLM-generated text against domain-specific rubrics. Get letter grades,
 ## License
 
 MIT
+
+## Premium Rubric Packs
+
+Production-ready YAML rubric packs with weighted scoring dimensions, signal matching, and benchmark suites.
+
+| Pack | Rubrics | Price | Link |
+|------|---------|-------|------|
+| Customer Support | 6 | $12 | [Get it](https://consumerdiv.gumroad.com/l/eval-kit-customer-support) |
+| Technical Documentation | 6 | $15 | [Get it](https://consumerdiv.gumroad.com/l/eval-kit-tech-docu) |
+| Sales Enablement | 6 | $15 | [Get it](https://consumerdiv.gumroad.com/l/eval-kit-sales-enablement) |
+| HR Compliance | 6 | $18 | [Get it](https://consumerdiv.gumroad.com/l/eval-kit-hr-compliance) |
+| Real Estate | 6 | $18 | [Get it](https://consumerdiv.gumroad.com/l/-eval-kit-real-estate) |
+| **All 5 Packs Bundle** | **30** | **$39** (50% off) | [**Get the bundle**](https://consumerdiv.gumroad.com/l/eval-kit-bundle) |
+
+Each pack includes:
+- 6 weighted YAML rubrics with positive/negative signal matching
+- JSONL benchmark suite for validation
+- Drop-in compatible with `eval-kit score --pack <name>`
