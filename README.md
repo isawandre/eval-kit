@@ -1,13 +1,4 @@
-
-## Available Packs
-
-| Pack | Dimensions | Use Case |
-|---|---|---|
-| `customer_support` | 6 | Empathy, resolution, escalation |
-| `technical_docs` | 6 | Accuracy, clarity, code examples |
-| `sales_enablement` | 6 | Pitch quality, objection handling, CTA |
-| `hr_compliance` | 6 | HR policy, legal citations, bias, PII |
-| `real_estate` | 6 | Listing copy, market language, compliance |
+Evaluation kit is the open-source scoring engine. Rubric packs are sold separately as YAML bundles on Gumroad. Install a pack, drop it into ./packs/, and run.
 
 ## How It Works
 
